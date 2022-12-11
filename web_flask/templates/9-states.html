@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBNB</title>
+</head>
+<body>
+    {% if id and id in list_ids %}
+    {% for state in states %}
+    {% if state.id == id %}
+    <h1>State: {{ state.name }}</h1>
+    {% endif %}
+    {% endfor %}
+    <h3>Cities:</h3>
+    {% for city in cities | sort(attribute='name') %}
+    {% if city.state_id == id %}
+    <ul>
+        <li>
+            {{ city.id }}: <b>{{ city.name }}</b>
+        </li>
+    </ul>
+    {% endif %}
+    {% endfor %}
+
+    {% elif id and id not in list_ids %}
+    <h1>Not found</h1>
+
+    {% else %}
+    <h1>States</h1>
+    <ul>
+        {% for state in states | sort(attribute='name') %}
+        <li>
+            {{ state.id }}: <b>{{ state.name }}</b>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
